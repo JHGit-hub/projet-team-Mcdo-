@@ -1,4 +1,4 @@
-// JS pour page burgers
+//////////////////////// JS pour page burgers ////////////////////////////////
 if(window.location.pathname === "/pages/burgers.html"){
     fetch("../mcdo.json")
         .then(function(response) {
@@ -29,10 +29,7 @@ if(window.location.pathname === "/pages/burgers.html"){
                 divImage.innerHTML = `<img src="../assets/${burgers.image}">`;
                 name.textContent = burgers.name;
                 price.innerHTML = `<span>Ajouter au panier </span> ${burgers.price}€`;
-
- 
                 divBtnMore.innerHTML = `<button onclick="viewDetails('${burgers.id}')" title="voir plus"><img src='../assets/icon/eye.png'></button>`;
-
 
             // integration des elements
                 divCart.appendChild(price);
@@ -52,9 +49,75 @@ if(window.location.pathname === "/pages/burgers.html"){
                 burgersListe.appendChild(cardBurgers);
             }
         });
+
+    // modal view
+
+    let modalProduct = document.getElementById("modalProduct");
+    let divImageProduct = document.getElementById("imageProduct");
+    let backBtn = document.getElementById("backBtn");
+    let divNameProduct = document.getElementById("nameProduct");
+    let divDescriptionProduct = document.getElementById("descriptionProduct");
+    let divCalorieProduct = document.getElementById("calorieProduct");
+
+    function viewDetails(burgerView){
+        if(modalProduct.classList.contains("hidden")){
+            modalProduct.classList.remove("hidden");
+            remove();
+
+            for(let i=0; i<burgers.length; i++){
+                if(burgers[i].id === burgerView){
+
+                    // image
+                    let imageProduct = document.createElement("div");
+                    imageProduct.innerHTML = `<img src="../assets/${burgers.image}">`;
+                    divImageProduct.appendChild(imageProduct);
+
+                    // name
+                    let nameProduct = document.createElement("h2");
+                    nameProduct.textContent = burgers.name;
+                    divNameProduct.appendChild(nameProduct);
+
+                    // description
+                    let descriptionProduct = document.createElement("h3");
+                    descriptionProduct.textContent = burgers.description;
+                    divDescriptionProduct.appendChild(descriptionProduct);
+
+                    // calorie
+                    let calorieProduct = document.createElement("p");
+                    calorieProduct.textContent = burgers.calorie + " calories";
+                    divCalorieProduct.appendChild(calorieProduct);
+                }
+            }
+
+            backBtn.addEventListener('click', function(){
+                if(!modalProduct.classList.contains("hidden")){
+                    modalProduct.classList.add("hidden");
+                    remove();
+                };
+            });
+        }
+    }
+
+
+
 }
 
-// JS pour page sides
+
+//////////////////////// function remove() modal ////////////////////////////////
+
+function remove(){
+    divCalorieProduct.innerHTML = "";
+    divDescriptionProduct.innerHTML = "";
+    divNameProduct.innerHTML = "";
+    divImageProduct.innerHTML = "";
+};
+
+//////////////////////////////////////////////////////////////////////////////////
+
+
+
+//////////////////////// JS pour page sides ////////////////////////////////
+
 if(window.location.pathname === "/pages/sides.html"){
     fetch("../mcdo.json")
         .then(function(response) {
@@ -110,7 +173,7 @@ if(window.location.pathname === "/pages/sides.html"){
         });
 }
 
-// JS pour page drinks
+//////////////////////// JS pour page drinks ////////////////////////////////
 if(window.location.pathname === "/pages/drinks.html"){
     fetch("../mcdo.json")
         .then(function(response) {
@@ -166,7 +229,7 @@ if(window.location.pathname === "/pages/drinks.html"){
         });
 }
 
-// JS pour page desserts
+//////////////////////// JS pour page desserts ////////////////////////////////
 if(window.location.pathname === "/pages/desserts.html"){
     fetch("../mcdo.json")
         .then(function(response) {
@@ -222,7 +285,7 @@ if(window.location.pathname === "/pages/desserts.html"){
         });
 }
 
-// JS pour page menu
+//////////////////////// JS pour page menu ////////////////////////////////
 if(window.location.pathname === "/pages/menus.html"){
     fetch("../mcdo.json")
         .then(function(response) {
@@ -278,7 +341,7 @@ if(window.location.pathname === "/pages/menus.html"){
         });
 }
 
-// JS pour page happyMeal
+//////////////////////// JS pour page happyMeal ////////////////////////////////
 if(window.location.pathname === "/pages/happymeal.html"){
     fetch("../mcdo.json")
         .then(function(response) {
