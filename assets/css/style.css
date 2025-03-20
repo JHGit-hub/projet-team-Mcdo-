@@ -1,0 +1,24 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+
+}
+
+.card {
+    width: 5rem;
+    margin: ;
+}
+
+img {
+    width: 20rem;
+}
+
+p {
+    color: black;
+    background-color: green;
+}
+
+.column-1 {
+    display: flex;
+}
