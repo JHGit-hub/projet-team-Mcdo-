@@ -221,3 +221,115 @@ if(window.location.pathname === "/pages/desserts.html"){
             }
         });
 }
+
+// JS pour page menu
+if(window.location.pathname === "/pages/menus.html"){
+    fetch("../mcdo.json")
+        .then(function(response) {
+            if(!response.ok){
+                throw new Error ("Le fichier Json n'a pas pu être charger.");
+            }
+            return response.json();
+        })
+
+        .then(function(data) {
+            let menuListe = document.getElementById("menuListe");
+
+        // card menu
+
+            for(let i = 0; i<data.menus.length; i++ ){
+                let menus = data.menus[i];
+
+            // creation des elements
+                let cardMenu = document.createElement("div");
+                let divImage = document.createElement("div");
+                let divName = document.createElement("div");
+                let divCart = document.createElement("div");
+                let divBtnMore = document.createElement("div");
+                let name = document.createElement("h2");
+                let price = document.createElement("h3");
+
+            // liens avec le Json
+                divImage.innerHTML = `<img src="../assets/${menus.image}">`;
+                name.textContent = menus.name;
+                price.innerHTML = `<span>Ajouter au panier </span> ${menus.price}€`;
+
+ 
+                divBtnMore.innerHTML = `<button onclick="viewDetails('${menus.id}')" title="voir plus"><img src='../assets/icon/eye.png'></button>`;
+
+
+            // integration des elements
+                divCart.appendChild(price);
+                divCart.id = "divCart";
+
+                divName.appendChild(name);
+                divName.id = 'divName';
+
+                cardMenu.appendChild(divImage);
+                cardMenu.id = "card";
+
+                cardMenu.appendChild(divName);
+                cardMenu.appendChild(divCart);
+                cardMenu.appendChild(divBtnMore);
+
+            // integration dans le HTML
+                menuListe.appendChild(cardMenu);
+            }
+        });
+}
+
+// JS pour page happyMeal
+if(window.location.pathname === "/pages/happymeal.html"){
+    fetch("../mcdo.json")
+        .then(function(response) {
+            if(!response.ok){
+                throw new Error ("Le fichier Json n'a pas pu être charger.");
+            }
+            return response.json();
+        })
+
+        .then(function(data) {
+            let happyMealListe = document.getElementById("happyMealListe");
+
+        // card happyMeal
+
+            for(let i = 0; i<data.happyMeal.length; i++ ){
+                let happyMeal = data.happyMeal[i];
+
+            // creation des elements
+                let cardhappyMeal = document.createElement("div");
+                let divImage = document.createElement("div");
+                let divName = document.createElement("div");
+                let divCart = document.createElement("div");
+                let divBtnMore = document.createElement("div");
+                let name = document.createElement("h2");
+                let price = document.createElement("h3");
+
+            // liens avec le Json
+                divImage.innerHTML = `<img src="../assets/${happyMeal.image}">`;
+                name.textContent = happyMeal.name;
+                price.innerHTML = `<span>Ajouter au panier </span> ${happyMeal.price}€`;
+
+ 
+                divBtnMore.innerHTML = `<button onclick="viewDetails('${happyMeal.id}')" title="voir plus"><img src='../assets/icon/eye.png'></button>`;
+
+
+            // integration des elements
+                divCart.appendChild(price);
+                divCart.id = "divCart";
+
+                divName.appendChild(name);
+                divName.id = 'divName';
+
+                cardhappyMeal.appendChild(divImage);
+                cardhappyMeal.id = "card";
+
+                cardhappyMeal.appendChild(divName);
+                cardhappyMeal.appendChild(divCart);
+                cardhappyMeal.appendChild(divBtnMore);
+
+            // integration dans le HTML
+                happyMealListe.appendChild(cardhappyMeal);
+            }
+        });
+}
