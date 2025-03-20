@@ -123,7 +123,7 @@ if(window.location.pathname === "/pages/drinks.html"){
         .then(function(data) {
             let drinksListe = document.getElementById("drinksListe");
 
-        // card sides
+        // card drinks
 
             for(let i = 0; i<data.drinks.length; i++ ){
                 let drinks = data.drinks[i];
@@ -179,7 +179,7 @@ if(window.location.pathname === "/pages/desserts.html"){
         .then(function(data) {
             let dessertsListe = document.getElementById("dessertsListe");
 
-        // card sides
+        // card drinks
 
             for(let i = 0; i<data.desserts.length; i++ ){
                 let desserts = data.desserts[i];
@@ -218,62 +218,6 @@ if(window.location.pathname === "/pages/desserts.html"){
 
             // integration dans le HTML
                 dessertsListe.appendChild(cardDesserts);
-            }
-        });
-}
-
-// JS pour page happyMeal
-if(window.location.pathname === "/pages/happymeal.html"){
-    fetch("../mcdo.json")
-        .then(function(response) {
-            if(!response.ok){
-                throw new Error ("Le fichier Json n'a pas pu être charger.");
-            }
-            return response.json();
-        })
-
-        .then(function(data) {
-            let happyMealListe = document.getElementById("happyMealListe");
-
-        // card sides
-
-            for(let i = 0; i<data.happyMeal.length; i++ ){
-                let happyMeal = data.happyMeal[i];
-
-            // creation des elements
-                let cardHappyMeal = document.createElement("div");
-                let divImage = document.createElement("div");
-                let divName = document.createElement("div");
-                let divCart = document.createElement("div");
-                let divBtnMore = document.createElement("div");
-                let name = document.createElement("h2");
-                let price = document.createElement("h3");
-
-            // liens avec le Json
-                divImage.innerHTML = `<img src="../assets/${happyMeal.image}">`;
-                name.textContent = happyMeal.name;
-                price.innerHTML = `<span>Ajouter au panier </span> ${happyMeal.price}€`;
-
- 
-                divBtnMore.innerHTML = `<button onclick="viewDetails('${happyMeal.id}')" title="voir plus"><img src='../assets/icon/eye.png'></button>`;
-
-
-            // integration des elements
-                divCart.appendChild(price);
-                divCart.id = "divCart";
-
-                divName.appendChild(name);
-                divName.id = 'divName';
-
-                cardHappyMeal.appendChild(divImage);
-                cardHappyMeal.id = "card";
-
-                cardHappyMeal.appendChild(divName);
-                cardHappyMeal.appendChild(divCart);
-                cardHappyMeal.appendChild(divBtnMore);
-
-            // integration dans le HTML
-                happyMealListe.appendChild(cardHappyMeal);
             }
         });
 }
