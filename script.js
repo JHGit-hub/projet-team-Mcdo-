@@ -1,6 +1,6 @@
 // JS pour page burgers
 if(window.location.pathname === "/pages/burgers.html"){
-    fetch("mcdo.json")
+    fetch("../mcdo.json")
     .then(function(response) {
         if(!response.ok){
             throw new Error ("Le fichier Json n'a pas pu être charger.");
