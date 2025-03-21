@@ -1,4 +1,27 @@
+//////////////////////// JS generale ////////////////////////////////
+
+    // modal view
+
+let modalProduct = document.getElementById("modalProduct");
+let divImageProduct = document.getElementById("imageProduct");
+let backBtn = document.getElementById("backBtn");
+let divNameProduct = document.getElementById("nameProduct");
+let divDescriptionProduct = document.getElementById("descriptionProduct");
+let divCalorieProduct = document.getElementById("calorieProduct");
+
+
+    // function remove() modal
+
+function remove(){
+    divCalorieProduct.innerHTML = "";
+    divDescriptionProduct.innerHTML = "";
+    divNameProduct.innerHTML = "";
+    divImageProduct.innerHTML = "";
+};
+
+
 //////////////////////// JS pour page burgers ////////////////////////////////
+
 if(window.location.pathname === "/pages/burgers.html"){
     fetch("../mcdo.json")
         .then(function(response) {
@@ -52,13 +75,6 @@ if(window.location.pathname === "/pages/burgers.html"){
 
     // modal view
 
-    let modalProduct = document.getElementById("modalProduct");
-    let divImageProduct = document.getElementById("imageProduct");
-    let backBtn = document.getElementById("backBtn");
-    let divNameProduct = document.getElementById("nameProduct");
-    let divDescriptionProduct = document.getElementById("descriptionProduct");
-    let divCalorieProduct = document.getElementById("calorieProduct");
-
     function viewDetails(burgerView){
         if(modalProduct.classList.contains("hidden")){
             modalProduct.classList.remove("hidden");
@@ -97,23 +113,7 @@ if(window.location.pathname === "/pages/burgers.html"){
             });
         }
     }
-
-
-
 }
-
-
-//////////////////////// function remove() modal ////////////////////////////////
-
-function remove(){
-    divCalorieProduct.innerHTML = "";
-    divDescriptionProduct.innerHTML = "";
-    divNameProduct.innerHTML = "";
-    divImageProduct.innerHTML = "";
-};
-
-//////////////////////////////////////////////////////////////////////////////////
-
 
 
 //////////////////////// JS pour page sides ////////////////////////////////
@@ -171,9 +171,52 @@ if(window.location.pathname === "/pages/sides.html"){
                 sidesListe.appendChild(cardSides);
             }
         });
+
+    // modal view
+
+    function viewDetails(sideView){
+        if(modalProduct.classList.contains("hidden")){
+            modalProduct.classList.remove("hidden");
+            remove();
+
+            for(let i=0; i<sides.length; i++){
+                if(sides[i].id === sideView){
+
+                    // image
+                    let imageProduct = document.createElement("div");
+                    imageProduct.innerHTML = `<img src="../assets/${sides.image}">`;
+                    divImageProduct.appendChild(imageProduct);
+
+                    // name
+                    let nameProduct = document.createElement("h2");
+                    nameProduct.textContent = sides.name;
+                    divNameProduct.appendChild(nameProduct);
+
+                    // description
+                    let descriptionProduct = document.createElement("h3");
+                    descriptionProduct.textContent = sides.description;
+                    divDescriptionProduct.appendChild(descriptionProduct);
+
+                    // calorie
+                    let calorieProduct = document.createElement("p");
+                    calorieProduct.textContent = sides.calorie + " calories";
+                    divCalorieProduct.appendChild(calorieProduct);
+                }
+            }
+
+            backBtn.addEventListener('click', function(){
+                if(!modalProduct.classList.contains("hidden")){
+                    modalProduct.classList.add("hidden");
+                    remove();
+                };
+            });
+        }
+    }
 }
 
+
 //////////////////////// JS pour page drinks ////////////////////////////////
+
 if(window.location.pathname === "/pages/drinks.html"){
     fetch("../mcdo.json")
         .then(function(response) {
@@ -227,9 +270,52 @@ if(window.location.pathname === "/pages/drinks.html"){
                 drinksListe.appendChild(cardDrinks);
             }
         });
+
+    // modal view
+
+    function viewDetails(drinksView){
+        if(modalProduct.classList.contains("hidden")){
+            modalProduct.classList.remove("hidden");
+            remove();
+
+            for(let i=0; i<drinkss.length; i++){
+                if(drinks[i].id === drinksView){
+
+                    // image
+                    let imageProduct = document.createElement("div");
+                    imageProduct.innerHTML = `<img src="../assets/${drinks.image}">`;
+                    divImageProduct.appendChild(imageProduct);
+
+                    // name
+                    let nameProduct = document.createElement("h2");
+                    nameProduct.textContent = drinks.name;
+                    divNameProduct.appendChild(nameProduct);
+
+                    // description
+                    let descriptionProduct = document.createElement("h3");
+                    descriptionProduct.textContent = drinks.description;
+                    divDescriptionProduct.appendChild(descriptionProduct);
+
+                    // calorie
+                    let calorieProduct = document.createElement("p");
+                    calorieProduct.textContent = drinks.calorie + " calories";
+                    divCalorieProduct.appendChild(calorieProduct);
+                }
+            }
+
+            backBtn.addEventListener('click', function(){
+                if(!modalProduct.classList.contains("hidden")){
+                    modalProduct.classList.add("hidden");
+                    remove();
+                };
+            });
+        }
+    }
 }
 
+
 //////////////////////// JS pour page desserts ////////////////////////////////
+
 if(window.location.pathname === "/pages/desserts.html"){
     fetch("../mcdo.json")
         .then(function(response) {
@@ -283,9 +369,52 @@ if(window.location.pathname === "/pages/desserts.html"){
                 dessertsListe.appendChild(cardDesserts);
             }
         });
+
+    // modal view
+
+    function viewDetails(dessertsView){
+        if(modalProduct.classList.contains("hidden")){
+            modalProduct.classList.remove("hidden");
+            remove();
+
+            for(let i=0; i<desserts.length; i++){
+                if(desserts[i].id === dessertsView){
+
+                    // image
+                    let imageProduct = document.createElement("div");
+                    imageProduct.innerHTML = `<img src="../assets/${desserts.image}">`;
+                    divImageProduct.appendChild(imageProduct);
+
+                    // name
+                    let nameProduct = document.createElement("h2");
+                    nameProduct.textContent = desserts.name;
+                    divNameProduct.appendChild(nameProduct);
+
+                    // description
+                    let descriptionProduct = document.createElement("h3");
+                    descriptionProduct.textContent = desserts.description;
+                    divDescriptionProduct.appendChild(descriptionProduct);
+
+                    // calorie
+                    let calorieProduct = document.createElement("p");
+                    calorieProduct.textContent = desserts.calorie + " calories";
+                    divCalorieProduct.appendChild(calorieProduct);
+                }
+            }
+
+            backBtn.addEventListener('click', function(){
+                if(!modalProduct.classList.contains("hidden")){
+                    modalProduct.classList.add("hidden");
+                    remove();
+                };
+            });
+        }
+    }
 }
 
+
 //////////////////////// JS pour page menu ////////////////////////////////
+
 if(window.location.pathname === "/pages/menus.html"){
     fetch("../mcdo.json")
         .then(function(response) {
@@ -339,9 +468,52 @@ if(window.location.pathname === "/pages/menus.html"){
                 menuListe.appendChild(cardMenu);
             }
         });
+
+    // modal view
+
+    function viewDetails(menusView){
+        if(modalProduct.classList.contains("hidden")){
+            modalProduct.classList.remove("hidden");
+            remove();
+
+            for(let i=0; i<menus.length; i++){
+                if(menus[i].id === menusView){
+
+                    // image
+                    let imageProduct = document.createElement("div");
+                    imageProduct.innerHTML = `<img src="../assets/${menus.image}">`;
+                    divImageProduct.appendChild(imageProduct);
+
+                    // name
+                    let nameProduct = document.createElement("h2");
+                    nameProduct.textContent = menus.name;
+                    divNameProduct.appendChild(nameProduct);
+
+                    // description
+                    let descriptionProduct = document.createElement("h3");
+                    descriptionProduct.textContent = menus.description;
+                    divDescriptionProduct.appendChild(descriptionProduct);
+
+                    // calorie
+                    let calorieProduct = document.createElement("p");
+                    calorieProduct.textContent = menus.calorie + " calories";
+                    divCalorieProduct.appendChild(calorieProduct);
+                }
+            }
+
+            backBtn.addEventListener('click', function(){
+                if(!modalProduct.classList.contains("hidden")){
+                    modalProduct.classList.add("hidden");
+                    remove();
+                };
+            });
+        }
+    }
 }
 
+
 //////////////////////// JS pour page happyMeal ////////////////////////////////
+
 if(window.location.pathname === "/pages/happymeal.html"){
     fetch("../mcdo.json")
         .then(function(response) {
@@ -395,4 +567,45 @@ if(window.location.pathname === "/pages/happymeal.html"){
                 happyMealListe.appendChild(cardhappyMeal);
             }
         });
+
+    // modal view
+
+    function viewDetails(happyMealView){
+        if(modalProduct.classList.contains("hidden")){
+            modalProduct.classList.remove("hidden");
+            remove();
+
+            for(let i=0; i<happyMeal.length; i++){
+                if(happyMeal[i].id === happyMealView){
+
+                    // image
+                    let imageProduct = document.createElement("div");
+                    imageProduct.innerHTML = `<img src="../assets/${happyMeal.image}">`;
+                    divImageProduct.appendChild(imageProduct);
+
+                    // name
+                    let nameProduct = document.createElement("h2");
+                    nameProduct.textContent = happyMeal.name;
+                    divNameProduct.appendChild(nameProduct);
+
+                    // description
+                    let descriptionProduct = document.createElement("h3");
+                    descriptionProduct.textContent = happyMeal.description;
+                    divDescriptionProduct.appendChild(descriptionProduct);
+
+                    // calorie
+                    let calorieProduct = document.createElement("p");
+                    calorieProduct.textContent = happyMeal.calorie + " calories";
+                    divCalorieProduct.appendChild(calorieProduct);
+                }
+            }
+
+            backBtn.addEventListener('click', function(){
+                if(!modalProduct.classList.contains("hidden")){
+                    modalProduct.classList.add("hidden");
+                    remove();
+                };
+            });
+        }
+    }
 }
