@@ -8,6 +8,10 @@ let divDescriptionProduct = document.getElementById("descriptionProduct");
 let divCalorieProduct = document.getElementById("calorieProduct");
 let menusListe = document.getElementById("menusListe");  
 let menus = [];
+let sides = ["Frites Moyennes", "Deluxe Potatoes™", "P'tite Salade"];
+let drinks = ["Coca-Cola®", "Eau By McDo™", "Minute Maid® Orange"];
+
+
     
 fetch("../mcdo.json")
     .then(function(response) {
@@ -30,8 +34,39 @@ fetch("../mcdo.json")
             let divName = document.createElement("div");
             let divCart = document.createElement("div");
             let divBtnMore = document.createElement("div");
+            let divOptions = document.createElement("div");
             let name = document.createElement("h2");
             let price = document.createElement("h3");
+            let formSideOptions = document.createElement("form");
+            let formDrinksOptions = document.createElement("form");
+
+        // creation des choix (radio)
+
+            // sides
+            for( let k=0; k<sides.length; k++){
+                let inputSideOptions = document.createElement("input");
+                let labelSideOptions = document.createElement("label");
+
+                inputSideOptions.type = "radio";
+                inputSideOptions.name = "side";
+                inputSideOptions.value = sides[k];
+                labelSideOptions.textContent = sides[k] + " ";
+                labelSideOptions.appendChild(inputSideOptions);
+                formSideOptions.appendChild(labelSideOptions);
+            };
+
+        // drinks
+            for( let k=0; k<drinks.length; k++){
+                let inputDrinksOpions = document.createElement("input");
+                let labelDrinksOptions = document.createElement("label");
+
+                inputDrinksOpions.type = "radio";
+                inputDrinksOpions.name = "drinks";
+                inputDrinksOpions.value = drinks[k];
+                labelDrinksOptions.textContent = drinks[k] + " ";
+                labelDrinksOptions.appendChild(inputDrinksOpions);
+                formDrinksOptions.appendChild(labelDrinksOptions);
+            };
 
         // liens avec le Json
             divImage.innerHTML = `<img src="../assets/${menus[i].image}">`;
@@ -46,10 +81,15 @@ fetch("../mcdo.json")
             divName.appendChild(name);
             divName.id = 'divName';
 
+            divOptions.appendChild(formSideOptions);
+            divOptions.appendChild(formDrinksOptions);
+
             cardMenus.appendChild(divImage);
             cardMenus.id = "card";
 
             cardMenus.appendChild(divName);
+            cardMenus.appendChild(divOptions);
+
             cardMenus.appendChild(divCart);
             cardMenus.appendChild(divBtnMore);
 
