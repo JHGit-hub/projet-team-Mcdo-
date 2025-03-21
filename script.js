@@ -1,5 +1,40 @@
-// JS pour page burgers
+//////////////////////// JS generale ////////////////////////////////
+
+    // modal view
+/**
+let modalProduct = document.getElementById("modalProduct");
+let divImageProduct = document.getElementById("imageProduct");
+let backBtn = document.getElementById("backBtn");
+let divNameProduct = document.getElementById("nameProduct");
+let divDescriptionProduct = document.getElementById("descriptionProduct");
+let divCalorieProduct = document.getElementById("calorieProduct");
+
+
+    // function remove() modal
+
+function remove(){
+    divCalorieProduct.innerHTML = "";
+    divDescriptionProduct.innerHTML = "";
+    divNameProduct.innerHTML = "";
+    divImageProduct.innerHTML = "";
+};
+**/
+
+//////////////////////// JS pour page burgers ////////////////////////////////
+
 if(window.location.pathname === "/pages/burgers.html"){
+
+////////////// Déclaration des variables
+
+    let modalProduct = document.getElementById("modalProduct");
+    let divImageProduct = document.getElementById("imageProduct");
+    let backBtn = document.getElementById("backBtn");
+    let divNameProduct = document.getElementById("nameProduct");
+    let divDescriptionProduct = document.getElementById("descriptionProduct");
+    let divCalorieProduct = document.getElementById("calorieProduct");
+    let burgersListe = document.getElementById("burgersListe");  
+    let burgers = [];
+
     fetch("../mcdo.json")
         .then(function(response) {
             if(!response.ok){
@@ -9,12 +44,11 @@ if(window.location.pathname === "/pages/burgers.html"){
         })
 
         .then(function(data) {
-            let burgersListe = document.getElementById("burgersListe");
+            burgers = data.burgers;
 
         // card burgers
 
-            for(let i = 0; i<data.burgers.length; i++ ){
-                let burgers = data.burgers[i];
+            for(let i = 0; i<burgers.length; i++ ){
 
             // creation des elements
                 let cardBurgers = document.createElement("div");
@@ -26,13 +60,10 @@ if(window.location.pathname === "/pages/burgers.html"){
                 let price = document.createElement("h3");
 
             // liens avec le Json
-                divImage.innerHTML = `<img src="../assets/${burgers.image}">`;
-                name.textContent = burgers.name;
-                price.innerHTML = `<span>Ajouter au panier </span> ${burgers.price}€`;
-
- 
-                divBtnMore.innerHTML = `<button onclick="viewDetails('${burgers.id}')" title="voir plus"><img src='../assets/icon/eye.png'></button>`;
-
+                divImage.innerHTML = `<img src="../assets/${burgers[i].image}">`;
+                name.textContent = burgers[i].name;
+                price.innerHTML = `<span>Ajouter au panier </span> ${burgers[i].price}€`;
+                divBtnMore.innerHTML = `<button onclick="viewDetails('${burgers[i].id}')" title="voir plus"><img src='../assets/icon/eye.png'></button>`;
 
             // integration des elements
                 divCart.appendChild(price);
@@ -52,9 +83,66 @@ if(window.location.pathname === "/pages/burgers.html"){
                 burgersListe.appendChild(cardBurgers);
             }
         });
-}
 
-// JS pour page sides
+/////////////////// modal view
+
+
+
+
+// function remove() modal
+
+    function remove(){
+        divCalorieProduct.innerHTML = "";
+        divDescriptionProduct.innerHTML = "";
+        divNameProduct.innerHTML = "";
+        divImageProduct.innerHTML = "";
+    };
+    
+// function viewDetails()
+
+    function viewDetails(burgerView){
+        if(modalProduct.classList.contains("hidden")){
+            modalProduct.classList.remove("hidden");
+            remove();
+
+            for(let i=0; i<burgers.length; i++){
+                if(burgers[i].id === burgerView){
+
+                    // image
+                    let imageProduct = document.createElement("div");
+                    imageProduct.innerHTML = `<img src="../assets/${burgers[i].image}">`;
+                    divImageProduct.appendChild(imageProduct);
+
+                    // name
+                    let nameProduct = document.createElement("h2");
+                    nameProduct.textContent = burgers[i].name;
+                    divNameProduct.appendChild(nameProduct);
+
+                    // description
+                    let descriptionProduct = document.createElement("h3");
+                    descriptionProduct.textContent = burgers[i].description;
+                    divDescriptionProduct.appendChild(descriptionProduct);
+
+                    // calorie
+                    let calorieProduct = document.createElement("p");
+                    calorieProduct.textContent = burgers[i].calorie + " calories";
+                    divCalorieProduct.appendChild(calorieProduct);
+                }
+            }
+
+            backBtn.addEventListener('click', function(){
+                if(!modalProduct.classList.contains("hidden")){
+                    modalProduct.classList.add("hidden");
+                    remove();
+                };
+            });
+        };
+    };
+};
+
+
+//////////////////////// JS pour page sides ////////////////////////////////
+
 if(window.location.pathname === "/pages/sides.html"){
     fetch("../mcdo.json")
         .then(function(response) {
@@ -108,9 +196,52 @@ if(window.location.pathname === "/pages/sides.html"){
                 sidesListe.appendChild(cardSides);
             }
         });
+
+    // modal view
+
+    function viewDetails(sideView){
+        if(modalProduct.classList.contains("hidden")){
+            modalProduct.classList.remove("hidden");
+            remove();
+
+            for(let i=0; i<sides.length; i++){
+                if(sides[i].id === sideView){
+
+                    // image
+                    let imageProduct = document.createElement("div");
+                    imageProduct.innerHTML = `<img src="../assets/${sides.image}">`;
+                    divImageProduct.appendChild(imageProduct);
+
+                    // name
+                    let nameProduct = document.createElement("h2");
+                    nameProduct.textContent = sides.name;
+                    divNameProduct.appendChild(nameProduct);
+
+                    // description
+                    let descriptionProduct = document.createElement("h3");
+                    descriptionProduct.textContent = sides.description;
+                    divDescriptionProduct.appendChild(descriptionProduct);
+
+                    // calorie
+                    let calorieProduct = document.createElement("p");
+                    calorieProduct.textContent = sides.calorie + " calories";
+                    divCalorieProduct.appendChild(calorieProduct);
+                }
+            }
+
+            backBtn.addEventListener('click', function(){
+                if(!modalProduct.classList.contains("hidden")){
+                    modalProduct.classList.add("hidden");
+                    remove();
+                };
+            });
+        }
+    }
 }
 
-// JS pour page drinks
+
+//////////////////////// JS pour page drinks ////////////////////////////////
+
 if(window.location.pathname === "/pages/drinks.html"){
     fetch("../mcdo.json")
         .then(function(response) {
@@ -164,9 +295,52 @@ if(window.location.pathname === "/pages/drinks.html"){
                 drinksListe.appendChild(cardDrinks);
             }
         });
+
+    // modal view
+
+    function viewDetails(drinksView){
+        if(modalProduct.classList.contains("hidden")){
+            modalProduct.classList.remove("hidden");
+            remove();
+
+            for(let i=0; i<drinkss.length; i++){
+                if(drinks[i].id === drinksView){
+
+                    // image
+                    let imageProduct = document.createElement("div");
+                    imageProduct.innerHTML = `<img src="../assets/${drinks.image}">`;
+                    divImageProduct.appendChild(imageProduct);
+
+                    // name
+                    let nameProduct = document.createElement("h2");
+                    nameProduct.textContent = drinks.name;
+                    divNameProduct.appendChild(nameProduct);
+
+                    // description
+                    let descriptionProduct = document.createElement("h3");
+                    descriptionProduct.textContent = drinks.description;
+                    divDescriptionProduct.appendChild(descriptionProduct);
+
+                    // calorie
+                    let calorieProduct = document.createElement("p");
+                    calorieProduct.textContent = drinks.calorie + " calories";
+                    divCalorieProduct.appendChild(calorieProduct);
+                }
+            }
+
+            backBtn.addEventListener('click', function(){
+                if(!modalProduct.classList.contains("hidden")){
+                    modalProduct.classList.add("hidden");
+                    remove();
+                };
+            });
+        }
+    }
 }
 
-// JS pour page desserts
+
+//////////////////////// JS pour page desserts ////////////////////////////////
+
 if(window.location.pathname === "/pages/desserts.html"){
     fetch("../mcdo.json")
         .then(function(response) {
@@ -220,4 +394,243 @@ if(window.location.pathname === "/pages/desserts.html"){
                 dessertsListe.appendChild(cardDesserts);
             }
         });
+
+    // modal view
+
+    function viewDetails(dessertsView){
+        if(modalProduct.classList.contains("hidden")){
+            modalProduct.classList.remove("hidden");
+            remove();
+
+            for(let i=0; i<desserts.length; i++){
+                if(desserts[i].id === dessertsView){
+
+                    // image
+                    let imageProduct = document.createElement("div");
+                    imageProduct.innerHTML = `<img src="../assets/${desserts.image}">`;
+                    divImageProduct.appendChild(imageProduct);
+
+                    // name
+                    let nameProduct = document.createElement("h2");
+                    nameProduct.textContent = desserts.name;
+                    divNameProduct.appendChild(nameProduct);
+
+                    // description
+                    let descriptionProduct = document.createElement("h3");
+                    descriptionProduct.textContent = desserts.description;
+                    divDescriptionProduct.appendChild(descriptionProduct);
+
+                    // calorie
+                    let calorieProduct = document.createElement("p");
+                    calorieProduct.textContent = desserts.calorie + " calories";
+                    divCalorieProduct.appendChild(calorieProduct);
+                }
+            }
+
+            backBtn.addEventListener('click', function(){
+                if(!modalProduct.classList.contains("hidden")){
+                    modalProduct.classList.add("hidden");
+                    remove();
+                };
+            });
+        }
+    }
+}
+
+
+//////////////////////// JS pour page menu ////////////////////////////////
+
+if(window.location.pathname === "/pages/menus.html"){
+    fetch("../mcdo.json")
+        .then(function(response) {
+            if(!response.ok){
+                throw new Error ("Le fichier Json n'a pas pu être charger.");
+            }
+            return response.json();
+        })
+
+        .then(function(data) {
+            let menuListe = document.getElementById("menuListe");
+
+        // card menu
+
+            for(let i = 0; i<data.menus.length; i++ ){
+                let menus = data.menus[i];
+
+            // creation des elements
+                let cardMenu = document.createElement("div");
+                let divImage = document.createElement("div");
+                let divName = document.createElement("div");
+                let divCart = document.createElement("div");
+                let divBtnMore = document.createElement("div");
+                let name = document.createElement("h2");
+                let price = document.createElement("h3");
+
+            // liens avec le Json
+                divImage.innerHTML = `<img src="../assets/${menus.image}">`;
+                name.textContent = menus.name;
+                price.innerHTML = `<span>Ajouter au panier </span> ${menus.price}€`;
+
+ 
+                divBtnMore.innerHTML = `<button onclick="viewDetails('${menus.id}')" title="voir plus"><img src='../assets/icon/eye.png'></button>`;
+
+
+            // integration des elements
+                divCart.appendChild(price);
+                divCart.id = "divCart";
+
+                divName.appendChild(name);
+                divName.id = 'divName';
+
+                cardMenu.appendChild(divImage);
+                cardMenu.id = "card";
+
+                cardMenu.appendChild(divName);
+                cardMenu.appendChild(divCart);
+                cardMenu.appendChild(divBtnMore);
+
+            // integration dans le HTML
+                menuListe.appendChild(cardMenu);
+            }
+        });
+
+    // modal view
+
+    function viewDetails(menusView){
+        if(modalProduct.classList.contains("hidden")){
+            modalProduct.classList.remove("hidden");
+            remove();
+
+            for(let i=0; i<menus.length; i++){
+                if(menus[i].id === menusView){
+
+                    // image
+                    let imageProduct = document.createElement("div");
+                    imageProduct.innerHTML = `<img src="../assets/${menus.image}">`;
+                    divImageProduct.appendChild(imageProduct);
+
+                    // name
+                    let nameProduct = document.createElement("h2");
+                    nameProduct.textContent = menus.name;
+                    divNameProduct.appendChild(nameProduct);
+
+                    // description
+                    let descriptionProduct = document.createElement("h3");
+                    descriptionProduct.textContent = menus.description;
+                    divDescriptionProduct.appendChild(descriptionProduct);
+
+                    // calorie
+                    let calorieProduct = document.createElement("p");
+                    calorieProduct.textContent = menus.calorie + " calories";
+                    divCalorieProduct.appendChild(calorieProduct);
+                }
+            }
+
+            backBtn.addEventListener('click', function(){
+                if(!modalProduct.classList.contains("hidden")){
+                    modalProduct.classList.add("hidden");
+                    remove();
+                };
+            });
+        }
+    }
+}
+
+
+//////////////////////// JS pour page happyMeal ////////////////////////////////
+
+if(window.location.pathname === "/pages/happymeal.html"){
+    fetch("../mcdo.json")
+        .then(function(response) {
+            if(!response.ok){
+                throw new Error ("Le fichier Json n'a pas pu être charger.");
+            }
+            return response.json();
+        })
+
+        .then(function(data) {
+            let happyMealListe = document.getElementById("happyMealListe");
+
+        // card happyMeal
+
+            for(let i = 0; i<data.happyMeal.length; i++ ){
+                let happyMeal = data.happyMeal[i];
+
+            // creation des elements
+                let cardhappyMeal = document.createElement("div");
+                let divImage = document.createElement("div");
+                let divName = document.createElement("div");
+                let divCart = document.createElement("div");
+                let divBtnMore = document.createElement("div");
+                let name = document.createElement("h2");
+                let price = document.createElement("h3");
+
+            // liens avec le Json
+                divImage.innerHTML = `<img src="../assets/${happyMeal.image}">`;
+                name.textContent = happyMeal.name;
+                price.innerHTML = `<span>Ajouter au panier </span> ${happyMeal.price}€`;
+
+ 
+                divBtnMore.innerHTML = `<button onclick="viewDetails('${happyMeal.id}')" title="voir plus"><img src='../assets/icon/eye.png'></button>`;
+
+
+            // integration des elements
+                divCart.appendChild(price);
+                divCart.id = "divCart";
+
+                divName.appendChild(name);
+                divName.id = 'divName';
+
+                cardhappyMeal.appendChild(divImage);
+                cardhappyMeal.id = "card";
+
+                cardhappyMeal.appendChild(divName);
+                cardhappyMeal.appendChild(divCart);
+                cardhappyMeal.appendChild(divBtnMore);
+
+            // integration dans le HTML
+                happyMealListe.appendChild(cardhappyMeal);
+            }
+        });
+
+    // modal view
+
+    function viewDetails(happyMealView){
+        if(modalProduct.classList.contains("hidden")){
+            modalProduct.classList.remove("hidden");
+            remove();
+
+            for(let i=0; i<happyMeal.length; i++){
+                if(happyMeal[i].id === happyMealView){
+
+                    // image
+                    let imageProduct = document.createElement("div");
+                    imageProduct.innerHTML = `<img src="../assets/${happyMeal.image}">`;
+                    divImageProduct.appendChild(imageProduct);
+
+                    // name
+                    let nameProduct = document.createElement("h2");
+                    nameProduct.textContent = happyMeal.name;
+                    divNameProduct.appendChild(nameProduct);
+
+                    // description
+                    let descriptionProduct = document.createElement("h3");
+                    descriptionProduct.textContent = happyMeal.description;
+                    divDescriptionProduct.appendChild(descriptionProduct);
+
+                    // calorie
+                    let calorieProduct = document.createElement("p");
+                    calorieProduct.textContent = happyMeal.calorie + " calories";
+                    divCalorieProduct.appendChild(calorieProduct);
+                }
+            }
+
+            backBtn.addEventListener('click', function(){
+                if(!modalProduct.classList.contains("hidden")){
+                    modalProduct.classList.add("hidden");
+                    remove();
+                };
+            });
+        }
+    }
 }
