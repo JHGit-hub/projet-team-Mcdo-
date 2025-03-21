@@ -1,7 +1,7 @@
 //////////////////////// JS generale ////////////////////////////////
 
     // modal view
-
+/**
 let modalProduct = document.getElementById("modalProduct");
 let divImageProduct = document.getElementById("imageProduct");
 let backBtn = document.getElementById("backBtn");
@@ -18,11 +18,23 @@ function remove(){
     divNameProduct.innerHTML = "";
     divImageProduct.innerHTML = "";
 };
-
+**/
 
 //////////////////////// JS pour page burgers ////////////////////////////////
 
 if(window.location.pathname === "/pages/burgers.html"){
+
+////////////// Déclaration des variables
+
+    let modalProduct = document.getElementById("modalProduct");
+    let divImageProduct = document.getElementById("imageProduct");
+    let backBtn = document.getElementById("backBtn");
+    let divNameProduct = document.getElementById("nameProduct");
+    let divDescriptionProduct = document.getElementById("descriptionProduct");
+    let divCalorieProduct = document.getElementById("calorieProduct");
+    let burgersListe = document.getElementById("burgersListe");  
+    let burgers = [];
+
     fetch("../mcdo.json")
         .then(function(response) {
             if(!response.ok){
@@ -32,12 +44,11 @@ if(window.location.pathname === "/pages/burgers.html"){
         })
 
         .then(function(data) {
-            let burgersListe = document.getElementById("burgersListe");
+            burgers = data.burgers;
 
         // card burgers
 
-            for(let i = 0; i<data.burgers.length; i++ ){
-                let burgers = data.burgers[i];
+            for(let i = 0; i<burgers.length; i++ ){
 
             // creation des elements
                 let cardBurgers = document.createElement("div");
@@ -49,10 +60,10 @@ if(window.location.pathname === "/pages/burgers.html"){
                 let price = document.createElement("h3");
 
             // liens avec le Json
-                divImage.innerHTML = `<img src="../assets/${burgers.image}">`;
-                name.textContent = burgers.name;
-                price.innerHTML = `<span>Ajouter au panier </span> ${burgers.price}€`;
-                divBtnMore.innerHTML = `<button onclick="viewDetails('${burgers.id}')" title="voir plus"><img src='../assets/icon/eye.png'></button>`;
+                divImage.innerHTML = `<img src="../assets/${burgers[i].image}">`;
+                name.textContent = burgers[i].name;
+                price.innerHTML = `<span>Ajouter au panier </span> ${burgers[i].price}€`;
+                divBtnMore.innerHTML = `<button onclick="viewDetails('${burgers[i].id}')" title="voir plus"><img src='../assets/icon/eye.png'></button>`;
 
             // integration des elements
                 divCart.appendChild(price);
@@ -73,7 +84,21 @@ if(window.location.pathname === "/pages/burgers.html"){
             }
         });
 
-    // modal view
+/////////////////// modal view
+
+
+
+
+// function remove() modal
+
+    function remove(){
+        divCalorieProduct.innerHTML = "";
+        divDescriptionProduct.innerHTML = "";
+        divNameProduct.innerHTML = "";
+        divImageProduct.innerHTML = "";
+    };
+    
+// function viewDetails()
 
     function viewDetails(burgerView){
         if(modalProduct.classList.contains("hidden")){
@@ -85,22 +110,22 @@ if(window.location.pathname === "/pages/burgers.html"){
 
                     // image
                     let imageProduct = document.createElement("div");
-                    imageProduct.innerHTML = `<img src="../assets/${burgers.image}">`;
+                    imageProduct.innerHTML = `<img src="../assets/${burgers[i].image}">`;
                     divImageProduct.appendChild(imageProduct);
 
                     // name
                     let nameProduct = document.createElement("h2");
-                    nameProduct.textContent = burgers.name;
+                    nameProduct.textContent = burgers[i].name;
                     divNameProduct.appendChild(nameProduct);
 
                     // description
                     let descriptionProduct = document.createElement("h3");
-                    descriptionProduct.textContent = burgers.description;
+                    descriptionProduct.textContent = burgers[i].description;
                     divDescriptionProduct.appendChild(descriptionProduct);
 
                     // calorie
                     let calorieProduct = document.createElement("p");
-                    calorieProduct.textContent = burgers.calorie + " calories";
+                    calorieProduct.textContent = burgers[i].calorie + " calories";
                     divCalorieProduct.appendChild(calorieProduct);
                 }
             }
@@ -111,9 +136,9 @@ if(window.location.pathname === "/pages/burgers.html"){
                     remove();
                 };
             });
-        }
-    }
-}
+        };
+    };
+};
 
 
 //////////////////////// JS pour page sides ////////////////////////////////

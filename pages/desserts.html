@@ -10,8 +10,26 @@
     <header>
     </header>
     <main>
-        <div id="dessertsListe"></div>
+        <section class="cards>">
+            <div id="dessertsListe"></div>
+        </section>
+        <section>
+            <div class="modal hidden" id="modalProduct"> <!-- class hidden avec display:none; -->
+                <div class="product">
+                    <div class="image-product" id="imageProduct">
+                    </div>
+                    <div class="secondary-btn">
+                        <button id="backBtn">Retour</button> <!-- a placer en haut à droite de la modal // re-applique la class hidden -->
+                    </div>
+                </div>
+                <div class="details">
+                    <div class="name-product" id="nameProduct"></div>
+                    <div class="description-product" id="descriptionProduct"></div>
+                    <div class="calorie-product" id="calorieProduct"></div>
+                </div>
+            </div>
+        </section>
     </main>    
 </body>
-<script src="../script.js"></script>
+<script src="../script-desserts.js"></script>
 </html>
