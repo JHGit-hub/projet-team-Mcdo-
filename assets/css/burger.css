@@ -1,0 +1,119 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+header {
+    background-color: #008000;
+
+}
+
+.container {
+    width: 100%;
+    margin: auto;
+}
+
+.rowhead {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 5rem;
+    width: 80%;
+}
+   
+.columnheader1 a,
+.columheader3 a {
+    color: #ffffff;
+    text-decoration: none;
+    padding: 5px 10px;
+}
+
+.columheader2 img {
+    max-height: 60px;
+}
+
+.panier {
+    max-height: 30px;
+}
+
+#burgersListe {
+    display: flex;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+}
+
+#dessertsListe {
+    display: flex;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+}
+
+#drinksListe {
+    display: flex;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+}
+#sidesListe {
+    display: flex;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+}
+
+
+#card {
+    width: 45%;
+    display: flex;
+    gap: 2rem;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    }
+
+
+img {
+    width: 100%;
+    height: 25rem;
+    object-fit: contain;
+}
+
+h2 {
+    color: rgb(0, 0, 0);
+    text-align: center;
+    font-size: 50px;
+    background-color: #ffffff;
+}
+
+h3 {
+    color: black;
+    text-align: center;
+    font-size: 30px;
+    background-color: yellow;
+    border-radius: 50px;
+
+
+
+}
+
+button {
+    width: 100%;
+    height: 2rem;
+}
+button img {
+    height: 2rem;
+}
