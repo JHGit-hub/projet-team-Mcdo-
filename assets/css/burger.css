@@ -73,6 +73,23 @@ header {
     align-items: center;
     flex-direction: row;
 }
+#happyMealListe {
+    display: flex;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+}
+
+#menuListe {
+    display: flex;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+}
 
 
 #card {
@@ -116,4 +133,24 @@ button {
 }
 button img {
     height: 2rem;
+}
+
+.hidden{
+    display:none;
+}
+
+.modal {
+    position: absolute;
+    z-index: 1000;
+    top: 30%;
+    left: 25%;
+    background-color: #ffffff;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+    height: auto;
+    border: solid;
+
 }
