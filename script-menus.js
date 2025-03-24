@@ -55,7 +55,7 @@ fetch("../mcdo.json")
                 formSideOptions.appendChild(labelSideOptions);
             };
 
-        // drinks
+            // drinks
             for( let k=0; k<drinks.length; k++){
                 let inputDrinksOpions = document.createElement("input");
                 let labelDrinksOptions = document.createElement("label");
