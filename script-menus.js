@@ -6,8 +6,8 @@ let backBtn = document.getElementById("backBtn");
 let divNameProduct = document.getElementById("nameProduct");
 let divDescriptionProduct = document.getElementById("descriptionProduct");
 let divCalorieProduct = document.getElementById("calorieProduct");
-let happyMealListe = document.getElementById("happyMealListe");  
-let happyMeal = [];
+let menusListe = document.getElementById("menusListe");  
+let menus = [];
     
 fetch("../mcdo.json")
     .then(function(response) {
@@ -18,14 +18,14 @@ fetch("../mcdo.json")
     })
 
     .then(function(data) {
-        happyMeal = data.happyMeal;
+        menus = data.menus;
 
-    // card happyMeal
+    // card menus
 
-        for(let i = 0; i<happyMeal.length; i++ ){
+        for(let i = 0; i<menus.length; i++ ){
 
         // creation des elements
-            let cardHappyMeal = document.createElement("div");
+            let cardMenus = document.createElement("div");
             let divImage = document.createElement("div");
             let divName = document.createElement("div");
             let divCart = document.createElement("div");
@@ -34,10 +34,10 @@ fetch("../mcdo.json")
             let price = document.createElement("h3");
 
         // liens avec le Json
-            divImage.innerHTML = `<img src="../assets/${happyMeal[i].image}">`;
-            name.textContent = happyMeal[i].name;
-            price.innerHTML = `<span>Ajouter au panier </span> ${happyMeal[i].price}€`;
-            divBtnMore.innerHTML = `<button onclick="viewDetails('${happyMeal[i].name}')" title="voir plus"><img src='../assets/icon/eye.png'></button>`;
+            divImage.innerHTML = `<img src="../assets/${menus[i].image}">`;
+            name.textContent = menus[i].name;
+            price.innerHTML = `<span>Ajouter au panier </span> ${menus[i].price}€`;
+            divBtnMore.innerHTML = `<button onclick="viewDetails('${menus[i].name}')" title="voir plus"><img src='../assets/icon/eye.png'></button>`;
 
         // integration des elements
             divCart.appendChild(price);
@@ -46,15 +46,15 @@ fetch("../mcdo.json")
             divName.appendChild(name);
             divName.id = 'divName';
 
-            cardHappyMeal.appendChild(divImage);
-            cardHappyMeal.id = "card";
+            cardMenus.appendChild(divImage);
+            cardMenus.id = "card";
 
-            cardHappyMeal.appendChild(divName);
-            cardHappyMeal.appendChild(divCart);
-            cardHappyMeal.appendChild(divBtnMore);
+            cardMenus.appendChild(divName);
+            cardMenus.appendChild(divCart);
+            cardMenus.appendChild(divBtnMore);
 
         // integration dans le HTML
-            happyMealListe.appendChild(cardHappyMeal);
+            menusListe.appendChild(cardMenus);
         }
     });
     
@@ -73,36 +73,36 @@ function remove(){
         
     // function viewDetails()
     
-function viewDetails(happyMealView){
+function viewDetails(menusView){
     if(modalProduct.classList.contains("hidden")){
         modalProduct.classList.remove("hidden");
         remove();
 
-        let selectedHappyMeal = happyMeal.find( b=> b.name === happyMealView);
+        let selectedMenus = menus.find( b=> b.name === menusView);
 
-        if (!selectedHappyMeal) {
-            console.error("HappyMeal non trouvé avec l'ID :", happyMealView);
+        if (!selectedMenus) {
+            console.error("Menus non trouvé avec l'ID :", menusView);
             return;
         }
 
         // image
         let imageProduct = document.createElement("div");
-        imageProduct.innerHTML = `<img src="../assets/${selectedHappyMeal.image}">`;
+        imageProduct.innerHTML = `<img src="../assets/${selectedMenus.image}">`;
         divImageProduct.appendChild(imageProduct);
 
         // name
         let nameProduct = document.createElement("h2");
-        nameProduct.textContent = selectedHappyMeal.name;
+        nameProduct.textContent = selectedMenus.name;
         divNameProduct.appendChild(nameProduct);
 
         // description
         let descriptionProduct = document.createElement("h3");
-        descriptionProduct.textContent = selectedHappyMeal.description;
+        descriptionProduct.textContent = selectedMenus.description;
         divDescriptionProduct.appendChild(descriptionProduct);
 
         // calorie
         let calorieProduct = document.createElement("p");
-        calorieProduct.textContent = selectedHappyMeal.calories + " calories";
+        calorieProduct.textContent = selectedMenus.calories + " calories";
         divCalorieProduct.appendChild(calorieProduct);
         
 
