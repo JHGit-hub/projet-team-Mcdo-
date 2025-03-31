@@ -16,7 +16,7 @@ Borne Mc Donald's
 
 ## Author
 
-👤 **Julien - Promo 2025**
+👤 ** Julien et Frédéric - Promo 2025**
 
 * Github: [@JHGit-hub](https://github.com/JHGit-hub)
 
